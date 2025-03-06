@@ -21,18 +21,15 @@ class Pkg(ConanFile):
     def generate(self):
         deps = PremakeDeps(self)
         deps.generate()
-        tc = PremakeToolchain(self, workspace="*")
-        tc.variables["TEST"] = False
-        # tc.projects["HelloWorld"].kind = "ConsoleApp"
+        tc = PremakeToolchain(self)
+        tc.defines["TEST"] = True
+        # tc.projects["HelloWorld"].enable = False
         tc.generate()
 
     def build(self):
-        with chdir(self, self.source_folder):
-            premake = Premake(self)
-            premake.configure()
-        if self.settings.os != "Windows":
-            build_type = str(self.settings.build_type)
-            self.run(f"make config={build_type.lower()} -j")
+        premake = Premake(self)
+        premake.configure()
+        premake.build()
 
     def package(self):
         copy(self, "*.h", os.path.join(self.source_folder, "include"), os.path.join(self.package_folder, "include", "pkg"))

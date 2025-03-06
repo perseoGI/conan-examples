@@ -1,5 +1,3 @@
-include("conantoolchain.premake5.lua")
-
 workspace "HelloWorld"
    configurations { "Debug", "Release" }
 
