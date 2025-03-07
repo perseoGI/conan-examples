@@ -2,7 +2,9 @@
 
 
 For this project to run successfully, a conan fork is needed (currently) 
-Follow PR in https://github.com/conan-io/conan/pull/17898
+
+Follow Conan PR in https://github.com/conan-io/conan/pull/17898
+Follow Premake discussion in https://github.com/premake/premake-core/discussions/2441
 
 
 This example aims to test:
