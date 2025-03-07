@@ -142,3 +142,4 @@ venv.bak/
 Session.vim
 *~
 .undodir
+premake5

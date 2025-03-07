@@ -1,12 +1,14 @@
-workspace "HelloWorld"
+workspace "App"
    configurations { "Debug", "Release" }
+   -- defines { "TEST=1" }
 
-project "HelloWorld"
+project "main"
    kind "ConsoleApp"
    language "C++"
+   cppdialect "C++17"
 
    files { "**.h", "**.cpp" } 
-
+   
    filter "configurations:Debug"
       defines { "DEBUG" }
       symbols "On"
