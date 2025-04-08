@@ -27,14 +27,14 @@ class Libs(ConanFile):
     def build(self):
         premake = Premake(self)
         premake.configure()
-        premake.build()
+        premake.build(workspace="Libraries")
 
     def package(self):
         for lib in ["math", "utils"]:
             for header in ["*.h", "*.hpp"]:
                 copy(self, header, os.path.join(self.source_folder, lib, "include"), os.path.join(self.package_folder, "include", "libs"))
             for lib in ("*.lib", "*.a", "*.dll", "*.so", "*.dylib"):
-                copy(self, lib, self.build_folder, os.path.join(self.package_folder, "lib"), keep_path=False)
+                copy(self, lib, os.path.join(self.build_folder, "bin"), os.path.join(self.package_folder, "lib"))
 
     def package_info(self):
         self.cpp_info.libs = ["math", "utils"]

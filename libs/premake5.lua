@@ -13,8 +13,7 @@ project "math"
 
 project "utils"
     cppdialect "C++17"
-    kind "StaticLib"
-    -- kind "SharedLib"
+    -- kind "StaticLib"
+    kind "SharedLib"
     language "C++"
     files { "utils/include/*.hpp", "utils/include/*.h", "utils/src/*.cpp" }
-
