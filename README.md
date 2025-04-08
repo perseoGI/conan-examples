@@ -48,33 +48,63 @@ Linking utils
 
 
 ```sh
-$ conan build app --build=missing
+$ conan build consumer_cmake
 ```
 
 Traces:
 ```
 ...
-
 ======== Calling build() ========
-conanfile.py (app/1.0): Calling build()
-conanfile.py (app/1.0): RUN: premake5 --file=/Users/perseo/sources/test/premake-conan/app/build-release/conanfile.premake5.lua gmake --scripts=/Users/perseo/sources/test/premake-conan/app/build-release/conan --arch=arm64
-Building configurations...
-Running action 'gmake'...
-Generated Makefile...
-Generated main.make...
-Done (22ms).
-
-conanfile.py (app/1.0): RUN: make config=release -j
-==== Building main (release) ====
-Creating obj/Release
-main.cpp
-Linking main
-
+conanfile.py (consumer_cmake/1.0): Calling build()
+conanfile.py (consumer_cmake/1.0): Running CMake.configure()
+conanfile.py (consumer_cmake/1.0): RUN: cmake -G "Ninja" -DCMAKE_TOOLCHAIN_FILE="generators/conan_toolchain.cmake" -DCMAKE_INSTALL_PREFIX="/Use
+rs/perseo/sources/conan-premake-example/consumer_cmake" -DCMAKE_POLICY_DEFAULT_CMP0091="NEW" -DCMAKE_BUILD_TYPE="Release" "/Users/perseo/source
+s/conan-premake-example/consumer_cmake" --loglevel=VERBOSE
 ...
 ```
 
 ```
-$ ./app/build-release/main
+$ ./consumer_cmake/build/Release/consumer_cmake                               
+PRINT: Hello World!
+TEST_DEFINE is not defined
+-2.3
+-1
+hello, 1, 2.3, 4.6, -1, -2.3
+3
+"hello"
+(/ This is a test string
+```
+
+
+```sh
+$ conan build consumer_premake
+```
+
+Traces:
+```
+...
+======== Calling build() ========
+conanfile.py (consumer_premake/1.0): Calling build()
+luafile /Users/perseo/sources/conan-premake-example/consumer_premake/premake5.lua
+conanfile.py (consumer_premake/1.0): RUN: premake5 --file=/Users/perseo/sources/conan-premake-example/consumer_premake/build-release/conanfile.
+premake5.lua gmake --arch=arm64
+Building configurations...
+Running action 'gmake'...
+Generated Makefile...
+Generated main.make...
+Done (14ms).
+
+conanfile.py (consumer_premake/1.0): RUN: make config=release all -j
+==== Building main (release) ====
+Creating obj/Release
+Creating bin
+main.cpp
+Linking main
+...
+```
+
+```
+$ ./consumer_premake/build-release/bin/main                               
 PRINT: Hello World!
 TEST_DEFINE is not defined
 -2.3
@@ -95,5 +125,5 @@ hello, 1, 2.3, 4.6, -1, -2.3
 
 #### TODOs on conan generator side
 
-- [ ] Premake should work without declaring premakedeps or premaketoolchain
+- [ ] Link issues on shared libs on consumer side (consumer_cmake works well)
 
