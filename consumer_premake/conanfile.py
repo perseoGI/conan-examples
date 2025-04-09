@@ -21,7 +21,10 @@ class ConsumerPremake(ConanFile):
         deps = PremakeDeps(self)
         deps.generate()
         tc = PremakeToolchain(self)
-        tc.defines["TEST"] = False
+        tc.extra_defines["TEST"] = False
+        tc.extra_cflags = ["-Werror"]
+        tc.extra_cxxflags = ["-Wall", "-Wextra"]
+        tc.extra_ldflags = ["-lm"]
         tc.generate()
 
     def build(self):

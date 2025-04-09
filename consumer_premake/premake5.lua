@@ -1,6 +1,6 @@
 workspace "App"
    configurations { "Debug", "Release" }
-   -- defines { "TEST=1" }
+   defines { "TEST=1" }
 
 project "main"
    kind "ConsoleApp"
