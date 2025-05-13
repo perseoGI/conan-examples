@@ -20,6 +20,7 @@ class ConsumerCmake(ConanFile):
         deps = CMakeDeps(self)
         deps.generate()
         tc = CMakeToolchain(self)
+        tc.blocks["rpath"].skip_rpath = True
         tc.generate()
 
     def build(self):

@@ -11,6 +11,9 @@ class Libs(ConanFile):
     name = "libs"
     version = "1.0"
     exports_sources = '*'
+    package_type = "library"
+    options = { "shared": [True, False] }
+    default_options = { "shared": False }
 
     def layout(self):
         basic_layout(self)

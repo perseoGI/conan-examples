@@ -1,4 +1,3 @@
-
 from conan import ConanFile
 from conan import ConanFile
 from conan.tools.layout import basic_layout
@@ -9,6 +8,7 @@ class ConsumerPremake(ConanFile):
     name = "consumer_premake"
     version = "1.0"
     exports_sources = '*'
+    package_type = "application"
 
     def layout(self):
         basic_layout(self)
@@ -21,10 +21,13 @@ class ConsumerPremake(ConanFile):
         deps = PremakeDeps(self)
         deps.generate()
         tc = PremakeToolchain(self)
-        tc.extra_defines["TEST"] = False
-        tc.extra_cflags = ["-Werror"]
+        tc.extra_defines = ["VALUE=2"]
+        tc.extra_cflags = ["-Wextra"]
         tc.extra_cxxflags = ["-Wall", "-Wextra"]
         tc.extra_ldflags = ["-lm"]
+        tc.project("main").extra_defines = ["TEST=False"]
+        tc.project("test").disable = True
+        tc.project("main").extra_cxxflags = ["-FS"]
         tc.generate()
 
     def build(self):
