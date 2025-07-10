@@ -4,6 +4,14 @@
 #include <libs/quote.h>
 #include <libs/string.hpp>
 #include <libs/compression.h>
+#include <spdlog/spdlog.h>
+#include <unicode/utypes.h>
+#include <unicode/uchar.h>
+#include <unicode/locid.h>
+
+#include <unicode/uversion.h>
+
+
 
 int main() {
     const std::string thing("World");
@@ -21,4 +29,14 @@ int main() {
     std::cout << math::basicSum(1, 2) << '\n';
     std::cout << utils::toQuoted("hello") << '\n';
     std::cout << utils::compress("This is a test string" ) << '\n';
+    spdlog::info("This is a test log message");
+
+    UVersionInfo version;
+    u_getVersion(version);
+
+    std::cout << "ICU version: "
+              << (int)version[0] << "."
+              << (int)version[1] << "."
+              << (int)version[2] << "."
+              << (int)version[3] << std::endl;
 }

@@ -14,8 +14,8 @@ class ConsumerPremake(ConanFile):
         basic_layout(self)
 
     def requirements(self):
-        self.requires("fmt/11.1.3")
         self.requires("libs/1.0")
+        self.requires("spdlog/1.15.3")
 
     def generate(self):
         deps = PremakeDeps(self)

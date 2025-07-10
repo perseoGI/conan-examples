@@ -3,9 +3,10 @@ project(consumer_cmake CXX)
 
 add_executable(consumer_cmake src/main.cpp)
 
-find_package(fmt)
+find_package(spdlog)
 find_package(libs)
-target_link_libraries(consumer_cmake PRIVATE libs::libs fmt::fmt)
+find_package(ICU REQUIRED uc)
+target_link_libraries(consumer_cmake PRIVATE libs::libs fmt::fmt spdlog::spdlog ICU::uc)
 
 install(TARGETS consumer_cmake DESTINATION "."
         RUNTIME DESTINATION bin

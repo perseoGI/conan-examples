@@ -13,8 +13,9 @@ class ConsumerCmake(ConanFile):
         cmake_layout(self)
 
     def requirements(self):
-        self.requires("fmt/11.1.3")
         self.requires("libs/1.0")
+        self.requires("spdlog/1.15.3")
+        self.requires("icu/74.2")
 
     def generate(self):
         deps = CMakeDeps(self)

@@ -4,6 +4,7 @@
 #include <libs/quote.h>
 #include <libs/string.hpp>
 #include <libs/compression.h>
+#include <spdlog/spdlog.h>
 
 
 int main() {
@@ -33,4 +34,5 @@ int main() {
     std::cout << math::basicSum(1, 2) << '\n';
     std::cout << utils::toQuoted("hello") << '\n';
     std::cout << utils::compress("This is a test string" ) << '\n';
+    spdlog::info("This is a test log message");
 }
