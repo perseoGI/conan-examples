@@ -15,7 +15,7 @@ class QtGraphsConan(ConanFile):
         self.requires(self.tested_reference_str, options={"qtgraphs": True, "qtquick3d": True})
 
     def build_requirements(self):
-        self.tool_requires("cmake/[>=3.27 <4]")
+        self.tool_requires("cmake/[>=3.27]")
 
     def build(self):
         cmake = CMake(self)
