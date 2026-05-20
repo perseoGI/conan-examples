@@ -1,3 +1,17 @@
+"""
+Command wrapper plugin to run test_package binaries in emulated environments.
+
+This plugin enables running cross-compiled binaries in emulators/simulators:
+- Android: Uses adb to push and execute binaries on an Android emulator/device
+- Emscripten: Uses node to execute WebAssembly binaries
+
+To use this plugin, compile with:
+    -c tools.build.cross_building:can_run=True
+
+Example:
+    conan create . -pr:h android -c tools.build.cross_building:can_run=True
+"""
+
 import shlex
 from pathlib import Path
 
