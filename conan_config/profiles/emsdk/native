@@ -1,0 +1,23 @@
+include(./.base)
+
+[settings]
+arch=wasm
+
+[platform_tool_requires]
+emsdk/5.0.3
+
+[conf]
+#tools.build:compiler_executables={'c':'emcc', 'cpp':'em++'}
+# Add local Emscripten toolchain
+# tools.cmake.cmaketoolchain:user_toolchain=["/path/to/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"]
+
+tools.build:verbosity=verbose
+tools.compilation:verbosity=verbose
+
+#[buildenv]
+#CC=emcc
+#CXX=em++
+#AR=emar
+#NM=emnm
+#RANLIB=emranlib
+#STRIP=emstrip

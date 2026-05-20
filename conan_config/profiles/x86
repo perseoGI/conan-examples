@@ -1,0 +1,5 @@
+include(default)
+
+[settings]
+msys2/*:arch=x86_64
+compiler.cppstd=17

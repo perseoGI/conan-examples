@@ -1,0 +1,44 @@
+[settings]
+arch=armv8
+build_type=Release
+compiler=apple-clang
+compiler.cppstd=gnu17
+#compiler.cstd=gnu11
+compiler.libcxx=libc++
+compiler.version=17
+os=Macos
+
+#{% if context == "host" %}
+#[tool_requires]
+#!ninja/*:ninja/[*]
+#!ninja/*:mold/[*]
+#!mold/*:mold/[*]
+#{% endif %}
+
+# Usar el de sistema
+[platform_tool_requires]
+#ccache/4.10.2
+#ninja/1.13.1
+
+
+[conf]
+# Ninja
+tools.cmake.cmaketoolchain:generator=Ninja
+
+# CCache
+#tools.cmake.cmaketoolchain:user_toolchain+={{profile_dir}}/ccache.cmake
+
+# Mold
+#tools.build:exelinkflags=['--ld-path=ld64.mold']
+#tools.build:sharedlinkflags=['--ld-path=ld64.mold']
+#tools.cmake.cmaketoolchain:extra_variables={'CMAKE_LINKER_TYPE': 'MOLD'}
+
+# General config
+#tools.build:verbosity=verbose
+#tools.compilation:verbosity=verbose
+tools.system.package_manager:mode=install
+tools.system.package_manager:sudo=true
+tools.files.download:verify=False
+
+
+#tools.env:deactivation_mode=function

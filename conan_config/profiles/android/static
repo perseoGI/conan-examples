@@ -1,0 +1,5 @@
+include(./.ndk_base)
+
+[settings]
+compiler.libcxx=c++_static
+

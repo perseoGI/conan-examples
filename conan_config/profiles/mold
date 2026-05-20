@@ -1,0 +1,8 @@
+[tool_requires]
+*:mold/[*]
+
+[conf]
+tools.build:exelinkflags=['-fuse-ld=mold']
+tools.build:sharedlinkflags=['-fuse-ld=mold']
+
+#tools.cmake.cmaketoolchain:extra_variables={'CMAKE_LINKER_TYPE': 'MOLD'}

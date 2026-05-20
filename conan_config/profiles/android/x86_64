@@ -1,0 +1,4 @@
+include(./.ndk_base)
+
+[settings]
+arch=x86_64

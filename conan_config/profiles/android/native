@@ -1,0 +1,4 @@
+include(./.base)
+
+[conf]
+tools.android:ndk_path=/opt/homebrew/share/android-ndk
