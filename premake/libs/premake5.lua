@@ -1,9 +1,14 @@
 workspace "Libraries"
-    configurations { "Debug", "Release" }
+    configurations { "Debug", "Release", "Debug Sanitizers", "Release Sanitizers" }
     fatalwarnings {"All"}
     floatingpoint "Fast"
     includedirs { ".", "math", "utils" }
 
+    filter { "configurations:Debug Sanitizers" }
+        defines { "SANITIZERS" }
+        symbols "On"
+        optimize "Off"
+    filter{}
 
 project "math"
     cppdialect "C++17"
@@ -21,3 +26,14 @@ project "utils"
                         -- [1]    67347 abort      ./consumer_premake/build-release/bin/main
     language "C++"
     files { "utils/include/*.hpp", "utils/include/*.h", "utils/src/*.cpp" }
+
+premake.override(premake.modules.gmake, "target", function(base, cfg, toolset)
+  local targetpath = string.gsub(premake.project.getrelative(cfg.project, cfg.buildtarget.directory), ' ', '_')
+  premake.outln('TARGETDIR = ' .. targetpath)
+  premake.outln('TARGET = $(TARGETDIR)/' .. cfg.buildtarget.name)
+end)
+  
+premake.override(premake.modules.gmake, "objdir", function(base, cfg, toolset)
+  local objpath = string.gsub(premake.project.getrelative(cfg.project, cfg.objdir), ' ', '_')
+  premake.outln('OBJDIR = ' .. objpath)
+end)

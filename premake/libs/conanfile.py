@@ -12,17 +12,22 @@ class Libs(ConanFile):
     version = "1.0"
     exports_sources = '*'
     package_type = "library"
-    options = { "shared": [True, False] }
-    default_options = { "shared": False }
+    options = { "shared": [True, False], "sanitizers": [True, False] }
+    default_options = { "shared": False, "sanitizers": False }
 
     def layout(self):
         basic_layout(self)
 
     def requirements(self):
         self.requires("zstd/1.5.7")
+    
+    @property
+    def _premake_configuration(self):
+        return str(self.settings.build_type) + (" Sanitizers" if self.options.sanitizers else "") 
 
     def generate(self):
         deps = PremakeDeps(self)
+        deps.configuration = self._premake_configuration
         deps.generate()
         tc = PremakeToolchain(self)
         tc.generate()
@@ -30,7 +35,8 @@ class Libs(ConanFile):
     def build(self):
         premake = Premake(self)
         premake.configure()
-        premake.build(workspace="Libraries")
+        breakpoint()
+        premake.build(workspace="Libraries", configuration=self._premake_configuration)
 
     def package(self):
         for lib in ["math", "utils"]:
